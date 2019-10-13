@@ -4,16 +4,19 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_helpers/error-handler');
-const userController = require('users/users.controller')
+const userController = require('users/users.controller');
+const policiesController = require('policies/policies.controller');
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 app.use(cors());
 
 // use our middleware
-app.use('/users', userController)
+app.use('/users', userController);
+app.use('/policies', policiesController);
+const router = express.Router();
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? 80 : 4000;
