@@ -24,7 +24,7 @@ const getUserById = async (id) => {
 }
 
 const getUsers = async (name) => {    
-    const users = await UserModel.find()
+    const users = await UserModel.find().select('-password')
     
     if (name) {
         return users.find(user => user.name === name);
