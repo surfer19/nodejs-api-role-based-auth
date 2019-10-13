@@ -4,7 +4,6 @@ const Role = require('model/role')
 const config = require('config.json');
 const fetch = require('node-fetch');
 
-
 // TODO: get users from DB
 const getUsersFromDb = () => ([
     {  
@@ -43,28 +42,27 @@ const authenticate = async ({email, password}) => {
 }
 
 const getUserById = async (id) => {
-    const user = await fetch('http://www.mocky.io/v2/5808862710000087232b75ac')
-    const userData = await user.json();
-    const foundUser = userData.clients.find(user => user.id === id)
+    const allUsers = await getUsers();
+    const foundUser = allUsers.find(user => user.id === id);
     
-    return foundUser
+    return foundUser;
 }
 
 const getUsers = async (name) => {
-    const allUsers = await fetch('http://www.mocky.io/v2/5808862710000087232b75ac')
+    const allUsers = await fetch('http://www.mocky.io/v2/5808862710000087232b75ac');
     const userData = await allUsers.json();
     if (name) {
-        return userData.clients.find(user => user.name === name)
+        return userData.clients.find(user => user.name === name);
     }
     // return all users
-    return userData.clients
+    return userData.clients;
 }
 
 const getUserPolicies = async (id) => {        
-    const allPolicies = await fetch('http://www.mocky.io/v2/580891a4100000e8242b75c5')
+    const allPolicies = await fetch('http://www.mocky.io/v2/580891a4100000e8242b75c5');
     const policieData = await allPolicies.json();
     
-    return policieData.policies.filter(policie => policie.clientId === id)
+    return policieData.policies.filter(policie => policie.clientId === id);
 }
 
 module.exports = {
