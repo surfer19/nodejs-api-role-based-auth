@@ -17,7 +17,13 @@ In the project directory, run:
 Seed data from external api to mongo and runs the api on [http://localhost:4000]
 
 ## Flow
-To perform requests please use endpoint `/users/authenticate` to get token and then use it in request header as `Authorization: Bearer {token}`
+To perform requests please use endpoint `/users/authenticate`  to get token and then use it in request header as `Authorization: Bearer {token}`
+
+## Test users login credentials
+| email      | passsword |  Role
+|:------------------ |:---------- |----------
+| britneyblankenship@quotezart.com | elephant | admin
+| bethanyblankenship@quotezart.com | elephant | user
 
 ## API endpoints
 
