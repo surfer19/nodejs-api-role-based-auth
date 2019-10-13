@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const Mongoose = require("mongoose");
 const errorHandler = require('_helpers/error-handler');
 const userController = require('users/users.controller');
-const policiesController = require('policies/policies.controller');
+const policieController = require('policies/policies.controller');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,7 +23,7 @@ db.once('open', function() {
 
 // use our middleware
 app.use('/users', userController);
-app.use('/policies', policiesController);
+app.use('/policies', policieController);
 app.use(errorHandler);
 
 // start server

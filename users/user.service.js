@@ -1,6 +1,5 @@
 
 const jwt = require('jsonwebtoken');
-const Role = require('model/role')
 const config = require('config.json');
 const fetch = require('node-fetch');
 
