@@ -14,7 +14,9 @@ const seeder = new Seeder(config);
 
 const saveUserDataToFileSystem = async () => {
     const allUsers = await fetch('http://www.mocky.io/v2/5808862710000087232b75ac');
-    const jsonContent = JSON.stringify((await allUsers.json()).clients );
+    const userContent = (await allUsers.json()).clients
+    const userContentPasswords = userContent.map(user => ({...user, password: 'elephant'}))
+    const jsonContent = JSON.stringify(userContentPasswords);
     
     fs.writeFile("data/users/users.json", jsonContent, 'utf8', function (err) {
         if (err) {
