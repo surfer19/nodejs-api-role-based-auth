@@ -4,15 +4,14 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('_helpers/error-handler');
+const userController = require('users/users.controller')
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json())
 app.use(cors());
 
-// respond with "hello world" when a GET request is made to the homepage
-app.get('/', function (req, res) {
-    res.send('hello world')
-})
+// use our middleware
+app.use('/users', userController)
 
 app.use(errorHandler)
 
