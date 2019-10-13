@@ -6,7 +6,7 @@ const fetch = require('node-fetch');
 
 
 // TODO: get users from DB
-const getUsers = () => ([
+const getUsersFromDb = () => ([
     {  
         id:"a0ece5db-cd14-4f21-812f-966633e7be86",
         name:"Britney",
@@ -31,7 +31,7 @@ const getUsers = () => ([
 ])
 
 const authenticate = async ({email, password}) => {
-    const user = getUsers().find(user => user.email === email && user.password == password);
+    const user = getUsersFromDb().find(user => user.email === email && user.password == password);
     if (user) {
         const token = jwt.sign({ id: user.id, role: user.role }, config.secret);
         const { password, ...userWithoutPassword } = user;
@@ -50,7 +50,26 @@ const getUserById = async (id) => {
     return foundUser
 }
 
+const getUsers = async (name) => {
+    const allUsers = await fetch('http://www.mocky.io/v2/5808862710000087232b75ac')
+    const userData = await allUsers.json();
+    if (name) {
+        return userData.clients.find(user => user.name === name)
+    }
+    // return all users
+    return userData.clients
+}
+
+const getUserPolicies = async (id) => {        
+    const allPolicies = await fetch('http://www.mocky.io/v2/580891a4100000e8242b75c5')
+    const policieData = await allPolicies.json();
+    
+    return policieData.policies.filter(policie => policie.clientId === id)
+}
+
 module.exports = {
     authenticate,
-    getUserById
+    getUserById,
+    getUsers,
+    getUserPolicies
 };
