@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const Mongoose = require("mongoose");
 const errorHandler = require('_helpers/error-handler');
 const userController = require('users/users.controller');
 const policiesController = require('policies/policies.controller');
@@ -11,11 +12,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
+Mongoose.connect("mongodb://localhost/assessment", { useNewUrlParser: true });
+
+var db = Mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  // we're connected!
+  console.log('Connected to DB!')
+});
+
 // use our middleware
 app.use('/users', userController);
 app.use('/policies', policiesController);
-const router = express.Router();
-
 app.use(errorHandler);
 
 // start server
