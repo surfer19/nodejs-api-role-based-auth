@@ -12,9 +12,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
+    "forever": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongo-seeding": "^3.4.0-alpha.0",
     "mongoose": "^5.7.4",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.0",
     "rootpath": "^0.1.2"
   },
