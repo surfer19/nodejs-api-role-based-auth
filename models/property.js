@@ -15,6 +15,8 @@ const PropertyModel = new Schema({
 	priceType: String,
 	url: String,
 	imageUrls: Array,
+	title: String,
+	livingArea: Number,
 });
 
 module.exports = mongoose.model('properties', PropertyModel);

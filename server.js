@@ -10,14 +10,13 @@ const configDB = require('./config/database.js');
 // const userController = require('users/users.controller');
 // const policieController = require('policies/policies.controller');
 const propertyController = require('properties/properties.controller');
-const PropertyModel = require('models/properties')
+const PropertyModel = require('models/property')
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-console.log('configDB.url', configDB.url)
 Mongoose.connect(configDB.url, { useNewUrlParser: true });
 
 var db = Mongoose.connection;
@@ -45,7 +44,9 @@ const insertToDB = () => {
 				priceCurrency: item.data.priceCurrency,
 				priceType: item.data.priceType,
 				url: item.data.url,
-				imageUrls: item.data.imageUrls
+				imageUrls: item.data.imageUrls,
+				title: item.data.title,
+				livingArea: item.data.livingArea
 			}));
 			// delete all records
 			PropertyModel.deleteMany({}, err => err);

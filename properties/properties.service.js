@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const PropertyModel = require('models/properties');
+const PropertyModel = require('models/property');
 
 const syncData = async () => {
 	return fetch('https://api.apify.com/v2/datasets?token=Wwzi7SxDdoF5wbv8wnh7Lwbui')
@@ -23,8 +23,9 @@ const getProperties = async(startDate, endDate, city) => {
 		},
 		city: city
 	}, (err, res) => {
-			console.log('err', err)
-			// console.log('res', res)	
+			if(err) {
+				console.log('err', err)
+			}
 			return res.slice().sort((a, b) => b.createdAt - a.createdAt)
 		})
 }
